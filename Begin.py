@@ -2,34 +2,7 @@
 import os
 
 
-
-level1 = [
-"++++++++++++++++",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
-"|              |",
- "++++++++++++++++"]
-
-
-
-#def around_lab(size):                       #take the contour of the labyrinthe
-#    print("#{}#".format("#"*(size-2)))
-#    for i in range(size-2):
-#        print("#{}#".format(" "*(size-2)))
-#    print("#{}#".format("#"*(size-2)))
-
-
-def show_lab(lab,perso,pos_perso):                           #show the labyrinthe
+def show_lab(lab,perso,pos_perso):
     """show the labyrinthe"""
     compteur_ligne = 0
     for i in lab:
@@ -44,6 +17,8 @@ def verification_deplacement(lab,pos_col,pos_ligne):
     n_lignes = len(lab)
     if pos_ligne < 0 or pos_col < 0 or pos_ligne > (n_lignes -1) or pos_col > (n_cols -1):
         return None
+    elif lab[pos_ligne][pos_col] == "O" :
+        return [-1,-1]
     elif lab[pos_ligne][pos_col] != " " :
         return None
     else:
@@ -67,14 +42,24 @@ def choice_gamers(lab,pos_perso):
         pos_perso[0] = dep [0]
         pos_perso[1] = dep [1]
 
+def charge_lab(nom):
+    fic = open(nom + ".txt", "r")
+    data = fic.readlines()
+    for i in range(len(data)):
+        data[i] = data[i].strip()
+    return tuple(data)
 
-def jeu(lab,perso,pos_perso):
+def game(lab,perso,pos_perso):
     while True:
-        show_lab(level1,perso,pos_perso)
-        choice_gamers(level1,pos_perso)
+        show_lab(lab,perso,pos_perso)
+        choice_gamers(lab,pos_perso)
+        if pos_perso == [-1,-1]:
+            print("You win the level")
+            break
 
-
-
+#############
+#PROGRAMME PRINCIPAL
 perso = "X"
 pos_perso = [1,1]
-jeu(level1,perso,pos_perso)
+level_1 = charge_lab("level")
+game(level_1,perso,pos_perso)
