@@ -84,7 +84,7 @@ def choice_gamers(lab,pos_perso,gift):
     elif choix =="E" :
         os._exit(1)
     if dep == None:
-        print("Deplacement impossible")
+        print("impossible move")
     else :
         pos_perso[0] = dep [0]
         pos_perso[1] = dep [1]
