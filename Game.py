@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # -*-coding:UTF-8 -*
 import Begin
-import random
 from random import choice
 
 if __name__ == "__main__":
